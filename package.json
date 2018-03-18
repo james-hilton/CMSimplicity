@@ -1,0 +1,15 @@
+{
+  "name": "cmsimplicity",
+  "version": "0.0.0",
+  "description": "CMSimplicity",
+  "main": "app.js",
+  "license": "MIT",
+  "author": {
+    "name": "James Hilton"
+  },
+  "dependencies": {
+    "ace-builds": "^1.3.1",
+    "electron": "^1.8.2",
+    "jsftp": "^2.1.3"
+  }
+}

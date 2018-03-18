@@ -1,0 +1,220 @@
+* {
+    margin:0;
+    padding:0;
+}
+html , html body {min-width:750px;}
+header {
+    height: 50px;
+    background: #5d5d5d;
+    border-bottom: solid 2px #000;
+    border-right:2px solid #5d5d5d;
+    min-width:750px;
+}
+h1 {
+    height:16px;
+    font-size:16px;
+    float:left;
+    color: #ccc;
+    margin: 7px;
+}
+header nav {
+    float:right;
+    height: 50px;
+    margin: 7PX;
+}
+header nav button {
+    display:inline-block;
+    /* height:16px; */
+    font-weight:bold;
+    font-size:12px;
+    padding:2px;
+    margin-left:5px;
+    border-radius:3px;
+    border:none;
+    background:linear-gradient(#ccc,#aaa);
+}
+header nav button:hover {
+    background:#aaa;
+}
+header nav button:active {
+    background:linear-gradient(#aaa,#ccc);
+}
+
+/* copyright Google 2018 material icons (License available in CSS folder)*/
+
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    /*src: url(MaterialIcons-Regular.eot); /* For IE6-8 */
+    src: local('Material Icons'), local('MaterialIcons-Regular'), url(MaterialIcons-Regular.woff2) format('woff2');
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px; /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+
+/* SCROLL BARS */
+.vertical::-webkit-scrollbar {
+  width:10px;
+}
+.horizontal::webkit-scrollbar {
+  height:10px;
+}
+.ace_scrollbar-v::-webkit-scrollbar {
+    width: 10px;
+}
+.ace_scrollbar-h::webkit-scrollbar {
+    height: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #111;
+}
+::-webkit-scrollbar-thumb {
+  background:#555;
+}
+
+/* BUTTONS COLOURS*/
+.danger {background:#700;padding:10px;color:#fff;cursor:pointer;}
+.safe {background:#070;padding:10px;color:#fff;cursor:pointer;}
+.warning {background:#700;padding:10px;color:#fff;cursor:pointer;}
+.neutral {background:#007;padding:10px;color:#fff;cursor:pointer;}
+
+/* BUTTONS FOR TABS */
+#nav {position:absolute;border-right:2px solid #000;top: 52px;right: 0px;height:30px;left: 250px;z-index: 1;background: #333;padding-left: 40px; min-width:460px;}
+#nav button {
+  height:30px;
+  padding:5px;
+  display:block;
+  float:left;
+  border:none;
+  background: none;
+  color:#fff;
+  padding-left:15px;
+  padding-right:15px;
+}
+#nav button:focus {outline:0;}
+#nav button.current {
+  background:#111;
+}
+
+/* OVERVIEW */
+#pages {
+    background: #222;
+    color: #888;
+    width:250px;
+    position:absolute;
+    top: 52px;
+    left:0px;
+    bottom:0px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-right:solid 2px #000;
+    /* padding-right: 20px; */
+}
+div.pages {
+  width: 100%;
+  position:relative;
+}
+div.pages button {
+  border:none;
+  background:none;
+  color:#090;
+  font-weight:900;
+  font-size:20px;
+  position:absolute;
+  right:5px;
+  top:0px;
+  cursor:pointer;
+}
+h3.pages {
+  border-bottom:solid 2px #000;
+  padding:2px;
+  padding-left:10px;
+}
+.pages li {
+    position:relative;
+    height:20px;
+    border-bottom:solid 1px #000;
+    padding:1px;
+    padding-left:10px;
+}
+ul.pages li span.material-icons {
+    font-size: 1em !important;
+    vertical-align: middle !important;
+    padding-right: 5px !important;
+}
+.pages li:hover {
+    background:#333;
+    cursor:pointer;
+}
+
+.hidden-hover {
+  display:none;
+}
+
+#main-page {
+    background: #444;
+    color: #888;
+    position: absolute;
+    top: 82px;
+    left: 250px;
+    right:0px;
+    bottom:0px;
+    bottom: 0px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-right: solid 2px #000;
+    min-width:500px;
+}
+
+/* Meta Data */
+#metadata table {
+  width:100%;
+}
+#metadata table thead th {
+  font-weight:normal;
+  color:#fff;
+  text-align:left;
+  padding:10px;
+  font-family:sans-serif;
+}
+#metadata table tbody td {
+  padding:10px;
+  vertical-align:middle;
+}
+#metadata table tbody td input {
+  background:#222;
+  border:1px solid #555;
+  padding:5px;
+  width:90%;
+  color:inherit;
+}
+#metadata table tbody td textarea {
+  background:#222;
+  border:1px solid #555;
+  padding:5px;
+  width:90%;
+  color:inherit;
+  min-width:90%;
+  max-width:90%;
+}
