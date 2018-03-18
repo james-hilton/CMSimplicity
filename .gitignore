@@ -58,5 +58,5 @@ typings/
 .env
 
 # VS stuff
-.njsproj
+*.njsproj
 obj/

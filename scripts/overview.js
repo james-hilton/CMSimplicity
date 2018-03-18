@@ -130,6 +130,7 @@ window.onload = function () {
     LoadPages();
 
     
+    /*ftp.get("./", (err, socket) => {
         if (err) { alert(err); }
         socket.on("data", d => { file_ret = d.toString(); DisplayData(); });
         socket.on("close", err => { if (hadErr) { alert("Error retrieving file!"); } });
@@ -139,6 +140,7 @@ window.onload = function () {
 
     /*
     var tmpbuf = new Buffer("<!doctype html><html><head><title>Test page 1</title></head><body>A test page for node.js based CMS (edited)</body></html>");
+    ftp.put(tmpbuf, "./", err => {
         if (err) {
             alert(err);
         }
