@@ -6,7 +6,7 @@ var file_ret = "";
 var file_ret_path = "";
 
 // ftp values
-var data_ftp;
+
 var site_ftp;
 
 // Refresh Page Listings
@@ -65,6 +65,7 @@ function DisplayData(path) {
     });
 }
 
+/*
 var time_to_change = 0;
 var countdown = false;
 setInterval(function () {
@@ -73,7 +74,7 @@ setInterval(function () {
         countdown = false;
     }
     if (countdown) { time_to_change -= 1; }
-}, 100)
+}, 100)*/
 
 document.addEventListener("keydown", function () {
     time_to_change = 5;
@@ -115,19 +116,9 @@ function Save() {
         }
     });
 }
-
-window.onload = function () {
-    // set up jsftp
-
-    var data_ftp_login = {
-        host: "",
-        user: "",
-        pass: ""
-    };
-
-    data_ftp = new jsftp(data_ftp_login);
-
-    LoadPages();
+/*
+function () {
+   
 
     
     /*ftp.get("./", (err, socket) => {
@@ -147,5 +138,5 @@ window.onload = function () {
         else {
             alert("File Successfully uploaded!");
         }
-    });*/
-}
+    });
+}*/

@@ -218,3 +218,52 @@ ul.pages li span.material-icons {
   min-width:90%;
   max-width:90%;
 }
+
+/* Login */
+#login-display {
+  position: fixed;
+  background:RGBA(0,0,0,0.5);
+  top:0px;
+  left:0px;
+  right:0px;
+  bottom:0px;
+  
+  text-align: center;
+  white-space:nowrap;
+}
+#login-display:before {
+  content:'';
+  display:inline-block;
+  height:100%;
+  vertical-align:middle;
+  
+}
+#login-block {
+  display: inline-block;
+  width:500px;
+  vertical-align: middle;
+  background:#333;
+  border:solid 2px #000;
+  padding:30px;
+  /* align-content: center; */
+  color: #999;
+}
+#login-block span {
+  font-weight:bold;
+  text-align:left;
+  display: inline-block;
+  width: 20%;
+}
+#login-block input {
+  width: calc(80% - 10px);
+  padding:5px;
+  background:#222;
+  border:1px solid #555;
+  margin-top:5px;
+  color: inherit;
+}
+#login-block button {
+  float:right;
+  margin-top:5px;
+  border: none;
+}
