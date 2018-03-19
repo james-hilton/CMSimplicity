@@ -1,9 +1,13 @@
 ﻿const jsftp = require("jsftp");
 
 // returned file ls array
-var info_pages = [];
-var file_ret = "";
-var file_ret_path = "";
+var info_pages = [];        // list returned of pages in current directory
+var file_ret = "";          // page information returned from server
+var file_ret_path = "";     // path to page on server
+var file_template = "";     // template data for current page
+
+var page_path = "/";
+var template_path = "/templates/"
 
 // ftp values
 
@@ -53,12 +57,37 @@ function Display(x) {
         }
 }
 
-function DisplayData(path) {
-    file_ret_path = path;
-    data_ftp.get("/"+ path +"", (err, socket) => {
+// get template information for page
+function LoadTemplateRules() {
+    alert("LoadingTemplate");
+    data_ftp.get(template_path + file_ret.page_template + "/rules.json", (err, socket) => {
         if (err) { alert(err); }
         socket.on("data", d => {
+            // get template data and parse
+            file_template = JSON.parse(d.toString());
+            // initiate the creation of the main-page
+            if (file_template.regions) {
+                GenerateRegions();
+            }
+        });
+        socket.on("close", err => { if (!file_ret) { alert("Error retrieving template rules!"); } });
+        socket.resume();
+    });
+}
+
+// get information from page
+function DisplayData(path) {
+    // set path
+    file_ret_path = path;
+
+    // get JSON data and parse it into JavaScript Object for page
+    data_ftp.get(page_path + path + "", (err, socket) => {
+        if (err) { alert(err); }
+        socket.on("data", d => {
+            // get file data and parse
             file_ret = JSON.parse(d.toString());
+            // load template from data
+            LoadTemplateRules();
         });
         socket.on("close", err => { if (!file_ret) { alert("Error retrieving file!"); } });
         socket.resume();

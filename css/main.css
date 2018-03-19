@@ -222,11 +222,12 @@ ul.pages li span.material-icons {
 /* Login */
 #login-display {
   position: fixed;
-  background:RGBA(0,0,0,0.5);
+  background:RGBA(0,0,0,0.8);
   top:0px;
   left:0px;
   right:0px;
   bottom:0px;
+  z-index:20;
   
   text-align: center;
   white-space:nowrap;

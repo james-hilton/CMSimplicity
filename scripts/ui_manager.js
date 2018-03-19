@@ -1,9 +1,19 @@
 ﻿
-var references = [];
-var e_areas = [];
+var references = [];    // stores references to the DOM elements of editable regions
+var current_area = 0;   // the current index for the reference object
+
+var editor = ace.edit("editor");
+editor.setTheme("ace/theme/twilight");
+editor.session.setMode("ace/mode/html");
+editor.setShowPrintMargin(false);
+var editor_div = document.getElementById("editor");
+
+var e_areas = [];                                       
 var nav = document.getElementById("nav");
 var regions = document.getElementById("main-page");
 
+
+// new element on navigation bar for editable region
 function BuildNavButton(x, name) {
     var tmp = "<button id=\"n" + x + "\" onclick=\"Edit(" + x + ");\" ";
     if (x < 0) { tmp += "class=\"current\" "; }
@@ -11,28 +21,39 @@ function BuildNavButton(x, name) {
     nav.innerHTML += tmp;
 }
 
+// new editable region
 function BuildRegion(name, data) {
-    if (data.language == "html" || data.language == "css" || data.language == "javascript") {
-        regions.innerHTML += "<div id=\"editor-" + name + "\" style=\"width: 100 %;height: 100 %;\"></div>";
-        var tmp = ace.edit("editor-" + name);
-        tmp.setTheme("ace/theme/twilight");
-        tmp.session.setMode("ace/mode/" + data.language);
-        tmp.setShowPrintMargin(false);
-        references.push([document.getElementById("editor-" + name), tmp]);
-    }
-    else if (data.language == "text") {
+    
+    if (data.language == "text") {
 
     }
     else if (data.language == "list") {
 
     }
+    else {
+        //regions.innerHTML += "<div id=\"editor-" + name + "\" style=\"width: 100%;height: 100%;\"></div>";
+        var tmp = "ace/mode/" + data.language;
+        references.push([editor_div, tmp, name]);
+        
+    }
 }
 
-function GenerateRegions(template_regions) {
-    var tmp = [];
+// generate tabs and editors based on the template rules
+function GenerateRegions() {
+    // get template regions
+    var template_regions = file_template.regions;
+
+    // clear references
     references = [];
 
+    // clear html on page
+    nav.innerHTML = "";
+
+
+    // initialise counter for nav bar
     var counter = 0;
+
+    // iterate through template regions
     for (data in template_regions) {
         if (template_regions[data].editable == "true") {
             BuildNavButton(counter, data);
@@ -41,20 +62,9 @@ function GenerateRegions(template_regions) {
         }
     }
 
-    var editor1 = ace.edit("editor1");
-    editor1.setTheme("ace/theme/twilight");
-    editor1.session.setMode("ace/mode/html");
-    editor1.setShowPrintMargin(false);
+    Edit(0);
 
-    var editor2 = ace.edit("editor2");
-    editor2.setTheme("ace/theme/twilight");
-    editor2.session.setMode("ace/mode/css");
-    editor2.setShowPrintMargin(false);
 
-    var editor3 = ace.edit("editor3");
-    editor3.setTheme("ace/theme/twilight");
-    editor3.session.setMode("ace/mode/javascript");
-    editor3.setShowPrintMargin(false);
 
     // meta data tags
     var metadata = {
@@ -67,26 +77,28 @@ function GenerateRegions(template_regions) {
     }
 }
 
-var current_area = 0;
-// grab editor areas
-var e_areas = [];
-e_areas.push(document.getElementById("editor1"));
-e_areas.push(document.getElementById("editor2"));
-e_areas.push(document.getElementById("editor3"));
-e_areas.push(document.getElementById("metadata"));
 // control editor view
 function Edit(x) {
     // for editors
-    for (var i = 0; i < e_areas.length; i++) {
+    var currentiseditor = false;
+    for (var i = 0; i < references.length; i++) {
 
+        // setup current editor / editable regions
         if (i == x) {
-            e_areas[i].style.display = "block";
-            document.getElementById("n" + (i + 1) + "").classList = "current";
+            if (references[i][0].id == "editor") {
+                currentiseditor = true;                                             // stop editor from being hidden
+                editor.session.setMode(references[i][1]);                           // change language to the template setting
+                editor.setValue(file_ret.editable_regions[references[i][2]].value); // get content from the page file corresponding to the template region name
+            }
+            references[i][0].style.display = "block";
+            document.getElementById("n" + i + "").classList = "current";
             current_area = x;
         }
         else {
-            e_areas[i].style.display = "none";
-            document.getElementById("n" + (i + 1) + "").classList = "";
+            if (!(references[i][0].id == "editor" && currentiseditor)) {
+                references[i][0].style.display = "none";
+            }
+            document.getElementById("n" + i + "").classList = "";
         }
     }
     Display(x);
