@@ -32,31 +32,6 @@ function LoadPages() {
     });
 }
 
-
-function Display(x) {
-
-    if (x == 0) {
-        editor1.setValue(file_ret.content);
-    }
-    else if (x == 1) {
-        editor2.setValue(file_ret.style);
-    }
-    else if (x == 2) {
-        editor3.setValue(file_ret.script);
-    }
-    else if (x == 3) {
-        metadata.title.value = file_ret.meta.title;
-        metadata.Description.value = file_ret.meta.Description;
-        metadata.Keywords.value = file_ret.meta.Keywords;
-        metadata.og_title.value = file_ret.meta.og_title;
-        metadata.og_description.value = file_ret.meta.og_description;
-        metadata.og_image.value.value = file_ret.meta.og_image;
-    }
-    else {
-            alert("Error! This section doesn't exist");
-        }
-}
-
 // get template information for page
 function LoadTemplateRules() {
     alert("LoadingTemplate");
@@ -94,7 +69,7 @@ function DisplayData(path) {
     });
 }
 
-/*
+
 var time_to_change = 0;
 var countdown = false;
 setInterval(function () {
@@ -103,7 +78,7 @@ setInterval(function () {
         countdown = false;
     }
     if (countdown) { time_to_change -= 1; }
-}, 100)*/
+}, 100);
 
 document.addEventListener("keydown", function () {
     time_to_change = 5;
@@ -112,25 +87,8 @@ document.addEventListener("keydown", function () {
 
 function UpdateFile() {
     var x = current_area;
-    if (x == 0) {
-        file_ret.content = editor1.getValue();
-    }
-    else if (x == 1) {
-        file_ret.style = editor2.getValue();
-    }
-    else if (x == 2) {
-        file_ret.script = editor3.getValue();
-    }
-    else if (x == 3) {
-        file_ret.meta.title = metadata.title.value;
-        file_ret.meta.Description = metadata.Description.value;
-        file_ret.meta.Keywords = metadata.Keywords.value;
-        file_ret.meta.og_title = metadata.og_title.value;
-        file_ret.meta.og_description = metadata.og_description.value;
-        file_ret.meta.og_image = metadata.og_image.value.value;
-    }
-    else {
-        alert("Error! This section doesn't exist");
+    if (references[x][0].id == "editor") {
+        file_ret.editable_regions[references[x][2]].value = editor.getValue();
     }
 }
 

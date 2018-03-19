@@ -101,6 +101,5 @@ function Edit(x) {
             document.getElementById("n" + i + "").classList = "";
         }
     }
-    Display(x);
 }
 
