@@ -1,4 +1,4 @@
-﻿const jsftp = require("jsftp");
+﻿
 
 // returned file ls array
 var info_pages = [];        // list returned of pages in current directory
@@ -6,12 +6,10 @@ var file_ret = "";          // page information returned from server
 var file_ret_path = "";     // path to page on server
 var file_template = "";     // template data for current page
 
+// paths to files on server
 var page_path = "/";
 var template_path = "/templates/"
 
-// ftp values
-
-var site_ftp;
 
 // Refresh Page Listings
 function LoadPages() {

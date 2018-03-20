@@ -2,34 +2,45 @@
 var references = [];    // stores references to the DOM elements of editable regions
 var current_area = 0;   // the current index for the reference object
 
+// Set up Ace-builds Editor enviroment
 var editor = ace.edit("editor");
 editor.setTheme("ace/theme/twilight");
 editor.session.setMode("ace/mode/html");
 editor.setShowPrintMargin(false);
+
+// store reference to DOM of editor
 var editor_div = document.getElementById("editor");
 
-var e_areas = [];                                       
-var nav = document.getElementById("nav");
-var regions = document.getElementById("main-page");
+var e_areas = [];                                       // editor areas (deprecating)
+var nav = document.getElementById("nav");               // stores DOM reference to Nav area
+var regions = document.getElementById("main-page");     // store DOM reference to editable regions area
 
 
 // new element on navigation bar for editable region
 function BuildNavButton(x, name) {
+    // create nav button
     var tmp = "<button id=\"n" + x + "\" onclick=\"Edit(" + x + ");\" ";
-    if (x < 0) { tmp += "class=\"current\" "; }
+
+    // set as current if button is first to be created in current series
+    if (x <= 0) { tmp += "class=\"current\" "; }
+
+    // close tags and output to html
     tmp += ">" + name + "</button>";
     nav.innerHTML += tmp;
 }
 
 // new editable region
 function BuildRegion(name, data) {
-    
+
+    // check if input is pure text
     if (data.language == "text") {
 
     }
+    // check if input is a templated list
     else if (data.language == "list") {
 
     }
+    // if its not custom then prepare to use editor for editing
     else {
         //regions.innerHTML += "<div id=\"editor-" + name + "\" style=\"width: 100%;height: 100%;\"></div>";
         var tmp = "ace/mode/" + data.language;
@@ -61,12 +72,12 @@ function GenerateRegions() {
             counter++;
         }
     }
-
+    // display information for first value
     Edit(0);
 
 
 
-    // meta data tags
+    // meta data tags (unused)
     var metadata = {
         title: document.getElementById("md_title"),
         Description: document.getElementById("md_description"),
