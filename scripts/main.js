@@ -7,19 +7,13 @@ var file_ret_path = "";                                         // path to page 
 var file_template = "";                                         // template data for current page
 
 
-// UI variables
-var references = [];                                            // stores references to the DOM elements of editable regions
-var current_area = 0;                                           // the current index for the reference object
-var e_areas = [];                                               // editor areas (deprecating)
+// DOM references
 var nav = document.getElementById("nav");                       // stores DOM reference to Nav area
 var regions = document.getElementById("main-page");             // store DOM reference to editable regions area
 
-// Set up Ace-builds Editor enviroment
-var editor = ace.edit("editor");                                // initialise editor
-editor.setTheme("ace/theme/twilight");                          // Set the theme of the editor
-editor.session.setMode("ace/mode/html");                        // Set default language for editor
-editor.setShowPrintMargin(false);                               // hide print line in editor
-var editor_div = document.getElementById("editor");             // store DOM reference for editor
+// Configure ui
+ui.Configure("editor");
+
 
 // Functions to sign in
 function SignIn() {
@@ -36,7 +30,7 @@ function SignIn() {
             server.LoadPages("/", function (ret) { document.getElementById("info").innerHTML = ret.formatted; });
 
             // Hide Login screen
-            HideLogin(login_ref);
+            ui.Hide(login_ref);
         }
         else {
             alert("Authentication failed! Please check if your login information is correct.");
