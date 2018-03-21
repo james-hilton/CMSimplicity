@@ -1,23 +1,5 @@
-﻿
-var references = [];    // stores references to the DOM elements of editable regions
-var current_area = 0;   // the current index for the reference object
-
-// Set up Ace-builds Editor enviroment
-var editor = ace.edit("editor");
-editor.setTheme("ace/theme/twilight");
-editor.session.setMode("ace/mode/html");
-editor.setShowPrintMargin(false);
-
-// store reference to DOM of editor
-var editor_div = document.getElementById("editor");
-
-var e_areas = [];                                       // editor areas (deprecating)
-var nav = document.getElementById("nav");               // stores DOM reference to Nav area
-var regions = document.getElementById("main-page");     // store DOM reference to editable regions area
-
-
-// new element on navigation bar for editable region
-function BuildNavButton(x, name) {
+﻿// new element on navigation bar for editable region
+function BuildNavButton(x, name, nav_ref) {
     // create nav button
     var tmp = "<button id=\"n" + x + "\" onclick=\"Edit(" + x + ");\" ";
 
@@ -26,7 +8,7 @@ function BuildNavButton(x, name) {
 
     // close tags and output to html
     tmp += ">" + name + "</button>";
-    nav.innerHTML += tmp;
+    nav_ref.innerHTML += tmp;
 }
 
 // new editable region
@@ -44,21 +26,23 @@ function BuildRegion(name, data) {
     else {
         //regions.innerHTML += "<div id=\"editor-" + name + "\" style=\"width: 100%;height: 100%;\"></div>";
         var tmp = "ace/mode/" + data.language;
-        references.push([editor_div, tmp, name]);
+
+        // return new build region reference
+        return [editor_div, tmp, name];
         
     }
 }
 
 // generate tabs and editors based on the template rules
-function GenerateRegions() {
+function GenerateRegions(template_regions, nav_ref) {
     // get template regions
     var template_regions = file_template.regions;
 
-    // clear references
-    references = [];
+    // tmp references
+    var refs = [];
 
     // clear html on page
-    nav.innerHTML = "";
+    nav_ref.innerHTML = "";
 
 
     // initialise counter for nav bar
@@ -67,13 +51,21 @@ function GenerateRegions() {
     // iterate through template regions
     for (data in template_regions) {
         if (template_regions[data].editable == "true") {
-            BuildNavButton(counter, data);
-            BuildRegion(data, template_regions[data]);
+            // create button for region
+            BuildNavButton(counter, data, nav_ref);
+
+            // create region and add to references
+            refs.push(BuildRegion(data, template_regions[data]));
+
+            // iterate counter for UI ID
             counter++;
         }
     }
+
+    return references;
+
     // display information for first value
-    Edit(0);
+    /*Edit(0);
 
 
 
@@ -85,7 +77,9 @@ function GenerateRegions() {
         og_title: document.getElementById("md_og_title"),
         og_description: document.getElementById("md_og_desription"),
         og_image: document.getElementById("md_og_image")
-    }
+    }*/
+
+    
 }
 
 // control editor view
