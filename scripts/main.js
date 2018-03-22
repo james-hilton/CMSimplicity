@@ -1,15 +1,11 @@
-﻿
-// ftp variables
-var login_ref = document.getElementById("login-display");       // stores reference to login screen DOM element
+﻿var login_ref = document.getElementById("login-display");       // stores reference to login screen DOM element
 var info_pages = [];                                            // list returned of pages in current directory
 var file_ret = "";                                              // page information returned from server
 var file_ret_path = "";                                         // path to page on server
 var file_template = "";                                         // template data for current page
-
-
-// DOM references
 var nav = document.getElementById("nav");                       // stores DOM reference to Nav area
 var regions = document.getElementById("main-page");             // store DOM reference to editable regions area
+current_dir = ["/"];                                               // stores the current directory path
 
 // Configure ui
 ui.Configure("editor");
@@ -38,7 +34,14 @@ function SignIn() {
     });
 }
 
+// Load tree view
+function LoadTree() {
+    // load pages from server
+    ftp.LoadPages(current_dir,function (ret) {
 
+
+    });
+}
 
 // get and display page data
 function DisplayData(path) {

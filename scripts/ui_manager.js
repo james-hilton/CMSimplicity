@@ -123,6 +123,16 @@ var ui = {
                 document.getElementById("n" + i + "").classList = "";
             }
         }
+    },
+
+
+    // formatting of the file tree
+    FormatTreeData: function (data) {
+        var output = "";
+        //output += "<li onclick=\"DisplayData('" + res[i].name + "');\"><span class='material-icons'>description</span>" + res[i].name.replace(".json", "") + "</li>";
+
+        // return object containing formatted output
+        return { formatted: output };
     }
 
 }

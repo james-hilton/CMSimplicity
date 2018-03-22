@@ -49,14 +49,41 @@ var server = {
 
             // loop through returned list from directory
             for (i = 0; i < res.length; i++) {
-                // find all html pages and output them
-                if (res[i].name.indexOf(".json") != -1) {
-                    // push file name to array
-                    pages.push(res[i]);
 
-                    // append formated list object to output
-                    output += "<li onclick=\"DisplayData('" + res[i].name + "');\"><span class='material-icons'>description</span>" + res[i].name.replace(".json", "") + "</li>";
+                var breakdown = res[i].name.split('.');             // get seperate components of the string in order to isolate file extenison
+                var type;
+                var name;
+                var extension = "";
+                if (breakdown.length != 1) {
+                    extension = breakdown.pop().toLowerCase();  // get the extension and remove it from the file name array
+                    name = breakdown.join('.');                 // join array back together without extension
+
+                    
+                    // ascertain file type
+                    switch (extension) {
+                        case "json":
+                            type = "page"; break;
+                        case "jpg":
+                        case "png":
+                        case "jpeg":
+                            type = "image"; break;
+                        case "js":
+                        case "php":
+                        case "html":
+                        case "css":
+                            type = "script"; break;
+                        default:
+                            type = "text"; break;
+                    }
+                } else {
+                    type = "dir";
+                    name = res[i].name;
                 }
+
+                
+                
+                // push file to array
+                pages.push({ name: name, type: type, extension: extension });                
             }
             // return a javascript opject containing preformated list elements strong and a list of files in directory
             callback({ formatted: output, array: pages });
