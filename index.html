@@ -10,6 +10,7 @@
         <h1>CMSimplicity</h1>
         <nav>
             <button class="neutral" onclick="LoadTree();">Refresh</button>
+            <button class="safe" onclick="NewPage();">New</button>
             <button class="danger" onclick="DeletePage();">Delete</button>
             <button class="safe" onclick="Save();">Save</button>
             <!--<button class="warning" onclick="RenamePage();">Rename</button>-->
@@ -19,13 +20,9 @@
         
     </nav>
     <nav id="pages" class="vertical">
-        <div class="pages"><h3 class="pages">Information Pages</h3><button onclick="NewPage();">+</button></div>
+        <div class="pages"><h3 class="pages">Website Navigation</h3></div>
         <ul id="info" class="pages"></ul>
-        <h3 class="pages">Project Pages</h3>
-        <ul id="project" class="pages"></ul>
-
-        <h3 class="pages">Galleries</h3>
-        <ul id="galleries" class="pages"></ul>
+       
     </nav>
     <section id="main-page" class="vertical">
         <!-- Page Options -->

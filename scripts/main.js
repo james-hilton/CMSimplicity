@@ -37,9 +37,8 @@ function SignIn() {
 // Load tree view
 function LoadTree() {
     // load pages from server for file path
-    server.LoadTreeData(0,{},current_dir,function (ret) {
-
-        alert(ret.toString());
+    server.LoadTreeData(0, {}, current_dir, function (ret) {
+        ui.FormatTreeData(ret, current_dir);
     });
 }
 
