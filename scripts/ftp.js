@@ -54,6 +54,7 @@ var server = {
                 var type;
                 var name;
                 var extension = "";
+                var path = dir + res[i].name;
                 if (breakdown.length != 1) {
                     extension = breakdown.pop().toLowerCase();  // get the extension and remove it from the file name array
                     name = breakdown.join('.');                 // join array back together without extension
@@ -78,16 +79,41 @@ var server = {
                 } else {
                     type = "dir";
                     name = res[i].name;
+                    path += "/";
                 }
 
                 
                 
                 // push file to array
-                pages.push({ name: name, type: type, extension: extension });                
+                pages.push({ name: name, type: type, extension: extension, path: path });                
             }
             // return a javascript opject containing preformated list elements strong and a list of files in directory
-            callback({ formatted: output, array: pages });
+            callback({ array: pages });
         });
+    },
+
+    // LoadTreeData recursive LoadData function
+    // callback data
+    LoadTreeData: function (path_pos, obj, path_array, callback) {
+
+
+
+        // check if path is traversed
+        if (path_array.length > path_pos) {
+            // get path from input
+            var path = "";
+            for (var i = 0; i <= path_pos; i++) { path += path_array[i] + "/"; }
+
+            this.LoadPages(path, function (load_ret) {
+
+                obj["array" + path_pos] = load_ret;
+
+                server.LoadTreeData(path_pos+1,obj, path_array, function (ret) { callback(ret); });
+            });
+        }
+        else {
+            callback(obj);
+        }
     },
 
     // Load JSON from server and callback JavaScript Object

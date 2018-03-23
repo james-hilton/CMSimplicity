@@ -5,7 +5,7 @@ var file_ret_path = "";                                         // path to page 
 var file_template = "";                                         // template data for current page
 var nav = document.getElementById("nav");                       // stores DOM reference to Nav area
 var regions = document.getElementById("main-page");             // store DOM reference to editable regions area
-current_dir = ["/"];                                               // stores the current directory path
+current_dir = ["","templates","t_master"];                      // stores the current directory path
 
 // Configure ui
 ui.Configure("editor");
@@ -36,10 +36,10 @@ function SignIn() {
 
 // Load tree view
 function LoadTree() {
-    // load pages from server
-    ftp.LoadPages(current_dir,function (ret) {
+    // load pages from server for file path
+    server.LoadTreeData(0,{},current_dir,function (ret) {
 
-
+        alert(ret.toString());
     });
 }
 
