@@ -126,13 +126,45 @@ var ui = {
     },
 
 
-    // formatting of the file tree
-    FormatTreeData: function (data) {
-        var output = "";
-        //output += "<li onclick=\"DisplayData('" + res[i].name + "');\"><span class='material-icons'>description</span>" + res[i].name.replace(".json", "") + "</li>";
+    // format file tree directory
+    FormatDir: function (data) {
+        var output = "<ul>";
+        for (var i = 0; i < data.length;i++) {
+            switch (data[i].type) {
+                case "page":
+                    output += "<li onclick=\"DisplayData('" + data[i].path + "');\"><span class='material-icons'>insert_drive_file</span>" + data[i].name + "</li>"; break;
+                case "script":
+                    output += "<li onclick=\"DisplayData('" + data[i].path + "');\"><span class='material-icons'>receipt</span>" + data[i].name + "</li>"; break;
+                case "dir":
+                    output += "<li onclick=\"DisplayData('" + data[i].path + "');\"><span class='material-icons'>folder</span>" + data[i].name + "</li>"; break;
+                case "image":
+                    output += "<li onclick=\"DisplayData('" + data[i].path + "');\"><span class='material-icons'>image</span>" + data[i].name + "</li>"; break;
+                case "text":
+                    output += "<li onclick=\"DisplayData('" + data[i].path + "');\"><span class='material-icons'>description</span>" + data[i].name + "</li>"; break;
+                default:
+                    output += "<li onclick=\"DisplayData('" + data[i].path + "');\"><span class='material-icons'></span>" + data[i].name + data[i].extension + "</li>"; break;
+            }
+        }
+        output += "</ul>";
+        return output;
+    },
 
-        // return object containing formatted output
-        return { formatted: output };
+    // formatting of the file tree
+    FormatTreeData: function (data,path) {
+        var output = "";
+        for (var i = 0; i < path.length; i++) {
+            var index = 0;
+            if (output != "") {
+                index = output.lastIndexOf(path[i]) + path[i].length + 5;   // very important that if you alter the format of the FormatDir you change the number to match the length till the end of </li>
+                output = output.substring(0, index) + this.FormatDir(data["array"+i].array) + output.substring(index);
+            }
+            else {
+                output += this.FormatDir(data["array"+i].array);
+            }
+            
+        }
+        // return string containing formatted output
+        return output;
     }
 
 }

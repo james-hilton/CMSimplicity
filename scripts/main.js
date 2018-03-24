@@ -23,7 +23,8 @@ function SignIn() {
         if (ret == true) {
 
             // Load pages in sidebar from root path
-            server.LoadPages("/", function (ret) { document.getElementById("info").innerHTML = ret.formatted; });
+            //server.LoadPages("/", function (ret) { document.getElementById("info").innerHTML = ret.formatted; });
+            LoadTree();
 
             // Hide Login screen
             ui.Hide(login_ref);
@@ -38,7 +39,7 @@ function SignIn() {
 function LoadTree() {
     // load pages from server for file path
     server.LoadTreeData(0, {}, current_dir, function (ret) {
-        ui.FormatTreeData(ret, current_dir);
+        document.getElementById("info").innerHTML = ui.FormatTreeData(ret, current_dir);
     });
 }
 
