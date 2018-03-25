@@ -132,17 +132,17 @@ var ui = {
         for (var i = 0; i < data.length;i++) {
             switch (data[i].type) {
                 case "page":
-                    output += "<li onclick=\"DisplayData('" + data[i].path + "');\"><span class='material-icons'>insert_drive_file</span>" + data[i].name + "</li>"; break;
+                    output += "<li onclick=\"DisplayData('page','" + data[i].path + "');\"><span class='material-icons'>insert_drive_file</span>" + data[i].name + "</li>"; break;
                 case "script":
-                    output += "<li onclick=\"DisplayData('" + data[i].path + "');\"><span class='material-icons'>receipt</span>" + data[i].name + "</li>"; break;
+                    output += "<li onclick=\"DisplayData('script','" + data[i].path + "');\"><span class='material-icons'>receipt</span>" + data[i].name + "</li>"; break;
                 case "dir":
-                    output += "<li onclick=\"DisplayData('" + data[i].path + "');\"><span class='material-icons'>folder</span>" + data[i].name + "</li>"; break;
+                    output += "<li onclick=\"DisplayData('dir','" + data[i].path + "');\"><span class='material-icons'>folder</span>" + data[i].name + "</li>"; break;
                 case "image":
-                    output += "<li onclick=\"DisplayData('" + data[i].path + "');\"><span class='material-icons'>image</span>" + data[i].name + "</li>"; break;
+                    output += "<li onclick=\"DisplayData('image','" + data[i].path + "');\"><span class='material-icons'>image</span>" + data[i].name + "</li>"; break;
                 case "text":
-                    output += "<li onclick=\"DisplayData('" + data[i].path + "');\"><span class='material-icons'>description</span>" + data[i].name + "</li>"; break;
+                    output += "<li onclick=\"DisplayData('text','" + data[i].path + "');\"><span class='material-icons'>description</span>" + data[i].name + "</li>"; break;
                 default:
-                    output += "<li onclick=\"DisplayData('" + data[i].path + "');\"><span class='material-icons'></span>" + data[i].name + data[i].extension + "</li>"; break;
+                    output += "<li onclick=\"DisplayData('unknown','" + data[i].path + "');\"><span class='material-icons'></span>" + data[i].name + data[i].extension + "</li>"; break;
             }
         }
         output += "</ul>";
