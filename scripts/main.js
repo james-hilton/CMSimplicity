@@ -44,9 +44,22 @@ function LoadTree() {
 }
 
 // get and display page data
-function DisplayData(path) {
+function DisplayData(type, path) {
     // get data from file and its attached template
-    LoadData(path);
+    if (type == "page") {
+        server.LoadData(path, function (page_data) {
+            // get rules for page's template
+            server.LoadTemplateRules(page_data.page_template, function (template_data) {
+                // Generate required regions in editor
+                ui.GenerateRegions(template_data.regions, nav);
+
+                // launch default region
+                ui.Edit(0);
+
+            });
+
+        });
+    }
 } 
 /*
 // event handling

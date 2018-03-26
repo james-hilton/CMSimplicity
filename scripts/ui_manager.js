@@ -87,7 +87,7 @@ var ui = {
             }
         }
 
-        return references;
+        return this.references;
 
         // display information for first value
         /*Edit(0);*/

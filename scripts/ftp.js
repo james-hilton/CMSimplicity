@@ -123,7 +123,7 @@ var server = {
         // get file from server at path
         this.data_ftp.get(path, function(err, socket) {
             if (err) { /*alert(err);*/ callback({ err: "Failed to load file due to: " + err }); }
-            socket.on("data", (d, callback) => {
+            socket.on("data", function(d) {
                 // get template data and parse
                 var file = JSON.parse(d.toString());
 
