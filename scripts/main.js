@@ -53,6 +53,8 @@ function DisplayData(type, path) {
                 // Generate required regions in editor
                 ui.GenerateRegions(template_data.regions, nav);
 
+                file_ret = page_data;
+
                 // launch default region
                 ui.Edit(0);
 

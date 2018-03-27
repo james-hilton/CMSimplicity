@@ -155,7 +155,7 @@ var server = {
     LoadData: function(path, callback) {
         // get JSON data and parse it into JavaScript Object for page
 
-        this.LoadJSON(this.page_path + path, function (x) { callback(x); }); 
+        this.LoadJSON(this.page_path + path, function (x) { this.current_file = x; callback(x); }); 
     },
 
     // replace page serverside with updated page
