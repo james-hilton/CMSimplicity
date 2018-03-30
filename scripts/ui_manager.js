@@ -54,14 +54,14 @@ var ui = {
             var tmp = "ace/mode/" + data.language;
 
             // return new build region reference
-            return { ele_name: "editor", DOM: false, language: tmp};  
+            return { region: name, ele_name: "editor", DOM: false, language: tmp};  
         }
     },
 
     // generate tabs and editors based on the template rules
     GenerateRegions: function(template_regions, nav_ref) {
         // get template regions
-        var template_regions = file_template.regions;
+        //var template_regions = file_template.regions;
 
         // tmp references
         this.references = [];
@@ -102,10 +102,10 @@ var ui = {
 
             // setup current editor / editable regions
             if (i == x) {
-                if (references[i].ele_name == "editor") {
-                    currentiseditor = true;                                                  // stop editor from being hidden
-                    this.editor.session.setMode(references[i][1]);                           // change language to the template setting
-                    this.editor.setValue(file_ret.editable_regions[references[i][2]].value); // get content from the page file corresponding to the template region name
+                if (this.references[i].ele_name == "editor") {
+                    currentiseditor = true;                                                       // stop editor from being hidden
+                    this.editor.session.setMode(this.references[i]["language"]);                           // change language to the template setting
+                    this.editor.setValue(file_ret.editable_regions[this.references[i]["region"]].value); // get content from the page file corresponding to the template region name
                     this.editor_div.style.display = "block";
                 } else {
                     this.references[i].DOM.style.display = "block";
@@ -115,7 +115,7 @@ var ui = {
             else {
                 if (!(this.references[i].ele_name == "editor" && currentiseditor)) {
                     if (this.references[i].ele_name == "editor") {
-                        this.editor_div.display.style = "none";
+                        this.editor_div.style.display = "none";
                     } else {
                         this.references[i].DOM.style.display = "none";
                     }
