@@ -54,12 +54,35 @@ function DisplayData(type, path) {
                 ui.GenerateRegions(template_data.regions, nav);
 
                 file_ret = page_data;
+                file_ret_path = path;
 
                 // launch default region
                 ui.Edit(0);
 
             });
 
+        });
+    }
+}
+
+function DisplayText(type, path, language) {
+    if (type == "script" || type == "text") {
+        // load page as text
+        server.LoadText(path, function (page_data) {
+            // check no error has been returned
+            if (page_data.err === undefined) {
+                ui.GenerateRegions({ content: { editable: "true", language: language } }, nav);
+                file_ret = {
+                    editable_regions: {
+                        content: {
+                            value: page_data.content
+                        }
+                    }
+                };
+                file_ret_path = path;
+
+                ui.Edit(0);
+            }
         });
     }
 } 

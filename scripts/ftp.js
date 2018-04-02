@@ -54,6 +54,7 @@ var server = {
                 var type;
                 var name;
                 var extension = "";
+                var language = "";
                 var path = dir + res[i].name;
                 if (breakdown.length != 1) {
                     extension = breakdown.pop().toLowerCase();  // get the extension and remove it from the file name array
@@ -69,10 +70,11 @@ var server = {
                         case "jpeg":
                             type = "image"; break;
                         case "js":
+                            type = "script"; language = "javascript"; break;
                         case "php":
                         case "html":
                         case "css":
-                            type = "script"; break;
+                            type = "script"; language = extension; break;
                         default:
                             type = "text"; break;
                     }
@@ -85,7 +87,7 @@ var server = {
                 
                 
                 // push file to array
-                pages.push({ name: name, type: type, extension: extension, path: path });                
+                pages.push({ name: name, type: type, extension: extension, path: path, language: language });                
             }
             // return a javascript opject containing preformated list elements strong and a list of files in directory
             callback({ array: pages });
@@ -156,6 +158,27 @@ var server = {
         // get JSON data and parse it into JavaScript Object for page
 
         this.LoadJSON(this.page_path + path, function (x) { this.current_file = x; callback(x); }); 
+    },
+
+    // return text
+    LoadText: function (path, callback) {
+        this.data_ftp.get(path, function (err, socket) {
+            if (err) { /*alert(err);*/ callback({ err: "Failed to load file due to: " + err }); }
+            socket.on("data", function (d) {
+                // get template data and parse
+                var file = { content: d.toString() };
+
+                // check that JSON parsed correctly
+                if (file === undefined) {
+                    file = { err: "Failed to parse JSON correctly" };
+                }
+
+                // return JavaScript of JSON
+                callback(file);
+
+            });
+            socket.resume();
+        });
     },
 
     // replace page serverside with updated page

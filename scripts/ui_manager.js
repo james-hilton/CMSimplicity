@@ -40,12 +40,9 @@ var ui = {
     // new editable region
     BuildRegion: function(name, data) {
 
-        // check if input is pure text
-        if (data.language == "text") {
 
-        }
         // check if input is a templated list
-        else if (data.language == "list") {
+        if (data.language == "list") {
 
         }
         // if its not custom then prepare to use editor for editing
@@ -134,7 +131,7 @@ var ui = {
                 case "page":
                     output += "<li onclick=\"DisplayData('page','" + data[i].path + "');\"><span class='material-icons'>insert_drive_file</span>" + data[i].name + "</li>"; break;
                 case "script":
-                    output += "<li onclick=\"DisplayData('script','" + data[i].path + "');\"><span class='material-icons'>receipt</span>" + data[i].name + "</li>"; break;
+                    output += "<li onclick=\"DisplayText('script','" + data[i].path + "','" + data[i].language + "');\"><span class='material-icons'>receipt</span>" + data[i].name + "</li>"; break;
                 case "dir":
                     output += "<li onclick=\"DisplayData('dir','" + data[i].path + "');\"><span class='material-icons'>folder</span>" + data[i].name + "</li>"; break;
                 case "image":
