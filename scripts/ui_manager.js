@@ -137,7 +137,7 @@ var ui = {
                 case "image":
                     output += "<li onclick=\"DisplayData('image','" + data[i].path + "');\"><span class='material-icons'>image</span>" + data[i].name + "</li>"; break;
                 case "text":
-                    output += "<li onclick=\"DisplayData('text','" + data[i].path + "');\"><span class='material-icons'>description</span>" + data[i].name + "</li>"; break;
+                    output += "<li onclick=\"DisplayText('text','" + data[i].path + "','" + data[i].language + "');\"><span class='material-icons'>description</span>" + data[i].name + "</li>"; break;
                 default:
                     output += "<li onclick=\"DisplayData('unknown','" + data[i].path + "');\"><span class='material-icons'></span>" + data[i].name + data[i].extension + "</li>"; break;
             }

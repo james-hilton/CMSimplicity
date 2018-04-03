@@ -76,7 +76,7 @@ var server = {
                         case "css":
                             type = "script"; language = extension; break;
                         default:
-                            type = "text"; break;
+                            type = "text"; language = "text"; break;
                     }
                 } else {
                     type = "dir";
