@@ -44,29 +44,28 @@ function LoadTree() {
 }
 
 // get and display page data
-function DisplayData(type, path) {
+function DisplayPage(path) {
     // get data from file and its attached template
-    if (type == "page") {
-        server.LoadData(path, function (page_data) {
-            // get rules for page's template
-            server.LoadTemplateRules(page_data.page_template, function (template_data) {
-                // Generate required regions in editor
-                ui.GenerateRegions(template_data.regions, nav);
 
-                file_ret = page_data;
-                file_ret_path = path;
+    server.LoadData(path, function (page_data) {
+        // get rules for page's template
+        server.LoadTemplateRules(page_data.page_template, function (template_data) {
+            // Generate required regions in editor
+            ui.GenerateRegions(template_data.regions, nav);
 
-                // launch default region
-                ui.Edit(0);
+            file_ret = page_data;
+            file_ret_path = path;
+            document.getElementById("page-path").innerHTML = path;
 
-            });
+            // launch default region
+            ui.Edit(0);
 
         });
-    }
+
+    });
 }
 
-function DisplayText(type, path, language) {
-    if (type == "script" || type == "text") {
+function DisplayText(path, language) {
         // load page as text
         server.LoadText(path, function (page_data) {
             // check no error has been returned
@@ -80,11 +79,11 @@ function DisplayText(type, path, language) {
                     }
                 };
                 file_ret_path = path;
+                document.getElementById("page-path").innerHTML = path;
 
                 ui.Edit(0);
             }
         });
-    }
 } 
 /*
 // event handling

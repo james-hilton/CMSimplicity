@@ -118,6 +118,14 @@ header nav button:active {
 }
 
 /* OVERVIEW */
+#page-path {
+  background:#111;
+  padding:5px;
+  padding-left:15px;
+  color:#a60;
+  font-size: 0.7em;
+  font-weight: bold;
+}
 #pages {
     background: #222;
     color: #888;
