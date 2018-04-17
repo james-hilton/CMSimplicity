@@ -1,5 +1,4 @@
 ﻿<?php
-echo "App Script launched!";
 
 $template_location = "../../test-site-data/templates/";
 $page_location = "../../test-site-data";
@@ -9,20 +8,16 @@ $page_location = "../../test-site-data";
 $path = $_SERVER['REQUEST_URI'];
 
 
-echo "<br/>Path specified: " . $page_location . $path;
 
 // is file a page?
 if( strrpos($path,".") === false ) {
 	// check for existence of page
 	if(file_exists($page_location . $path . ".json")) {
-	echo "<br/>Page Exists!";
 		// load page json
 		$page = json_decode(file_get_contents($page_location . $path . ".json"),true);
-		echo var_dump($page);
 		if($page !== false && $page !== null) {
 			// check that page template exists
 			if(file_exists($template_location . $page["page_template"] . "/rules.json") && file_exists($template_location . $page["page_template"] . "/template.html")) {
-				echo "<br/>Template Exists!";
 				// check that page parses correctly
 				$template_rules = json_decode(file_get_contents($template_location . $page["page_template"] . "/rules.json"),true);
 				$template = file_get_contents($template_location . $page["page_template"] . "/template.html");
@@ -33,6 +28,10 @@ if( strrpos($path,".") === false ) {
 						foreach($template_rules["regions"] as $key => $value) {
 							$template = str_replace("--[" . $key . "]--",$page[$key],$template);
 						}
+						foreach($template_rules["meta"] as $key => $value) {
+							$template = str_replace("--[" . $key . "]--",$page["meta"][$key],$template);
+						}
+
 						// echo generated page
 						echo $template;
 
